@@ -16,10 +16,10 @@ public interface SubscriptionService {
 	public String updateSubscription(String id, Subscription subscription);
 	public Optional<Subscription> getSubscriptionById(String id) throws IdNotFoundException, InvalidIdLengthException, InvalidAmountException, InvalidTypeException;
 	public Subscription[] getAllSubscriptions() throws InvalidIdLengthException, InvalidAmountException, InvalidTypeException;
-	public String deleteSubscriptionById(String id);
+	public String deleteSubscriptionById(String id) throws IdNotFoundException;
 	public Optional<List<Subscription>> getAllSubscriptionsDetails()
 			throws InvalidIdLengthException, InvalidAmountException, InvalidTypeException;
-
+	
 
 
 }
