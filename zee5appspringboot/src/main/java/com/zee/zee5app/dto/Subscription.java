@@ -14,10 +14,13 @@ import com.zee.zee5app.exception.InvalidIdLengthException;
 import com.zee.zee5app.exception.InvalidTypeException;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+@AllArgsConstructor
+@NoArgsConstructor
 @Setter
 @Getter
 @Data
@@ -30,16 +33,16 @@ public class Subscription {
 	private String sub_id;
 	@NotBlank
 	private String sub_type;
-	@NotNull
-	private Date sub_dop;
+	@NotBlank
+	private String sub_dop;
 	@NotBlank
 	private String sub_pack_country;
 	@NotBlank
 	private String Sub_payment_mode;
 	@NotBlank
 	private String sub_autorenewal;
-	@NotNull
-	private Date sub_doe;
+	@NotBlank
+	private String sub_doe;
 	@NotBlank
 	private String Sub_status;
 	@NotNull

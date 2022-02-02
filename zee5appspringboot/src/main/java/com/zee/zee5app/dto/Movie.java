@@ -1,5 +1,7 @@
 package com.zee.zee5app.dto;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,8 +16,11 @@ import com.zee.zee5app.exception.LocationNotFoundException;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Entity 
 @Table(name = "Movie")
@@ -44,11 +49,7 @@ public class Movie {
 	
 	
 	
-	public  Movie() {
-		
-		
-		
-	}
+	
 
 	
 		
