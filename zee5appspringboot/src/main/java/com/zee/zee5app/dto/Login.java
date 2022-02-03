@@ -29,6 +29,6 @@ public class Login {
 	@Size(max=50)
 	@NotBlank
 	private String reg_id;
-	@NotNull
-	private ROLE role;
+	
+	
 }

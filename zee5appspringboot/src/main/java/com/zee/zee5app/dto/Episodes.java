@@ -3,6 +3,8 @@ package com.zee.zee5app.dto;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -18,18 +20,20 @@ import lombok.NoArgsConstructor;
 @Entity 
 @Table(name = "Episodes")
 public class Episodes {
-	private static final int vvalue = 0;
+	private static final int value = 0;
 	@Id 
-	@Column(name = "username")
-	private String epi_id;
+	@Column(name = "id")
+	private String id;
 	@Size(max=50)
 	@NotBlank
-	private String epi_name;
-	@Size(max=50)
-	@NotBlank
-	private String ser_id;
+	private String name;
+	
 	@Min(value=0)
-	private int epi_length;
+	private int length;
 	@NotBlank
-	private String epi_location;
+	private String location;
+	
+	@ManyToOne
+	@JoinColumn(name="seriesid") // for foreign key
+	private Series series; // series id and act as fk
 }

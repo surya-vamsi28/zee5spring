@@ -1,13 +1,21 @@
 package com.zee.zee5app.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Length;
 
 import com.zee.zee5app.exception.LocationNotFoundException;
 
@@ -25,29 +33,32 @@ import lombok.ToString;
 @ToString
 @Data
 @Entity 
-@Table(uniqueConstraints = {@UniqueConstraint(columnNames = "series_name")})
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = "name")})
 
 public class Series {
 	@Id 
-	@Column(name = "series_Id")
-	private String series_id;
+	@Column(name = "Id")
+	@Length(min = 6 )
+	private String id;
 	@NotBlank
-	private String series_name;
+	private String name;
 	@NotBlank
-	private String series_genre;
+	private String genre;
 	@NotBlank
-	private String series_release_date;
-	@NotBlank
-	private String series_trailer;
+	private String release_date;
+	//@NotBlank
+	private String trailer;
 	@Min(value=1)
-	private int series_episodes;
+	private int numberepisodes;
 	@NotBlank
-	private String series_language;
+	private String language;
 	@NotBlank
-	private String series_cast;
+	private String cast;
 	@Max(value = 70)
-	private int series_agelimit;
+	private int agelimit;
 		
+	@OneToMany(mappedBy = "series", cascade = CascadeType.ALL)
+	private List<Episodes> episodes = new ArrayList<>();
 	
 	
 	

@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Component;
 
 import com.zee.zee5app.dto.Register;
+import com.zee.zee5app.exception.AlreadyExistsException;
 import com.zee.zee5app.exception.IdNotFoundException;
 import com.zee.zee5app.exception.InvalidEmailException;
 import com.zee.zee5app.exception.InvalidIdLengthException;
@@ -14,7 +15,7 @@ import com.zee.zee5app.exception.InvalidNameException;
 import com.zee.zee5app.exception.InvalidPasswordException;
 @Component
 public interface UserService {
-	public String addUser(Register register);
+	public String addUser(Register register) throws AlreadyExistsException;
 	public String updateUser(String id, Register register) throws IdNotFoundException;
 	public Optional<Register> getUserById(String id) throws IdNotFoundException, InvalidPasswordException, InvalidIdLengthException, InvalidNameException, InvalidEmailException;
 	public Register[] getAllUsers() throws InvalidIdLengthException, InvalidNameException, InvalidEmailException, InvalidPasswordException;

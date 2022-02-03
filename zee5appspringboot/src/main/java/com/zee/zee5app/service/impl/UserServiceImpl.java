@@ -8,12 +8,17 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.List;
 
+import com.zee.zee5app.dto.EROLE;
+import com.zee.zee5app.dto.Login;
+
 import com.zee.zee5app.dto.Register;
+import com.zee.zee5app.exception.AlreadyExistsException;
 import com.zee.zee5app.exception.IdNotFoundException;
 import com.zee.zee5app.exception.InvalidEmailException;
 import com.zee.zee5app.exception.InvalidIdLengthException;
 import com.zee.zee5app.exception.InvalidNameException;
 import com.zee.zee5app.exception.InvalidPasswordException;
+import com.zee.zee5app.repository.LoginRepository;
 import com.zee.zee5app.repository.UserRepository;
 
 import com.zee.zee5app.service.UserService;
@@ -23,35 +28,49 @@ import com.zee.zee5app.service.UserService;
 
 
 public class UserServiceImpl implements UserService {
-	
-	
-	
-	
-	
+
 	@Autowired
 	private UserRepository userRepository;
 	
 	private UserServiceImpl() throws IOException{
 		
 	}
-
+	@Autowired
+	LoginServiceImpl loginservice;
+	@Autowired
+	LoginRepository repository;
+	
+	
 	@Override
-	public String addUser(Register register) {
-		Register register2 =  userRepository.save(register);
-		
-		if(register2!=null) {
-			return "add Success";
+//	@org.springframework.transaction.annotation.Transactional(rollbackFor = AlreadyExistsException.class)
+	public String addUser(Register register) throws AlreadyExistsException {
+		// TODO Auto-generated method stub
+		//make exception for the next line
+		if(userRepository.existsByEmailAndContactNumber(register.getEmail(), register.getContactNumber()) == true) {
+			throw new AlreadyExistsException("this record already exists");
+		}
+
+			
+		Register register2 = userRepository.save(register);
+		if (register2 != null) {
+//			Login login = new Login(register.getEmail(), register.getPassword(), register.getId(), EROLE.ROLE_USER);
+//			if(repository.existsByUserName(register.getEmail())) {
+//				throw new AlreadyExistsException("this record already exists");
+//			}
+			
 		}
 		else {
 			return "fail";
 		}
-		                   
+		return null;
 	}
+
 
 	@Override
 	public String updateUser(String id, Register register) throws IdNotFoundException {
 		// TODO Auto-generated method stub
 		return null;
+		//update is taken care by JPA
 	}
 
 	@Override
@@ -102,6 +121,7 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return Optional.ofNullable(userRepository.findAll());
 	}
-
+	
+	
 	
 }

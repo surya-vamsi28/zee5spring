@@ -11,11 +11,16 @@ import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -93,7 +98,10 @@ public class Register implements Comparable<Register>
 		return o.id.compareTo(this.id);
 	}
 
-
+	@ManyToMany
+	@JoinTable(name = "user_roles",joinColumns = @JoinColumn(name="regId"),
+	inverseJoinColumns = @JoinColumn(name="role_id")) // registered user(regid) and role(roleid)
+	private Set<Role> roles = new HashSet<>();
 	
 	
 

@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -23,29 +24,28 @@ import lombok.Setter;
 @NoArgsConstructor
 @Data
 @Entity 
-@Table(name = "Movie")
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = "name")})
 
 
 public class Movie {
 	@Id 
-	@Column(name = "movie_Id")
-	private String movie_id;
+	private String id;
 	@NotBlank
-	private String movie_name;
+	private String name;
 	@NotBlank
-	private String movie_cast;
+	private String cast;
 	@Min(value=2)
-	private int movie_length;
+	private int length;
 	@NotNull
-	private String movie_Release_Date;
+	private String release_date;
 	@NotBlank
-	private String movie_trailer;
+	private String trailer;
 	@NotBlank
-	private String movie_language;
+	private String language;
 	@Max(value=70)
-	private int movie_agelimit;
+	private int agelimit;
 	@NotBlank
-	private String movie_genre;
+	private String genre;
 	
 	
 	

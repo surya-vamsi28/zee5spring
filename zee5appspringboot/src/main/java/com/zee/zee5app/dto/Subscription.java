@@ -29,26 +29,26 @@ import lombok.Setter;
 
 public class Subscription {
 	@Id 
-	@Column(name = "sub_Id")
-	private String sub_id;
+	@Column(name = "Id")
+	private String id;
 	@NotBlank
-	private String sub_type;
+	private String type;
 	@NotBlank
-	private String sub_dop;
+	private String dop;
 	@NotBlank
-	private String sub_pack_country;
+	private String pack_country;
 	@NotBlank
-	private String Sub_payment_mode;
+	private String payment_mode;
 	@NotBlank
-	private String sub_autorenewal;
+	private String autorenewal;
 	@NotBlank
-	private String sub_doe;
+	private String doe;
 	@NotBlank
-	private String Sub_status;
+	private String status;
 	@NotNull
-	private int Sub_amount;
+	private int amount;
 	@NotBlank
-	private String Sub_contactnumber;
+	private String contactnumber;
 	@NotBlank
 	private String reg_id;
 	
