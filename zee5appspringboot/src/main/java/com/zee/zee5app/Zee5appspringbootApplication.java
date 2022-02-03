@@ -49,7 +49,7 @@ public class Zee5appspringbootApplication {
 		
 		Register register = null;
 		
-		register = new Register("sc00005", "surya_vamsi", "kalidindi", "surya01@gmail.com","suryasurya", new BigDecimal("9491612222"));
+		register = new Register("sc00004", "surya_vamsi", "kalidindi", "surya02@gmail.com","suryasurya", new BigDecimal("9491612222"));
 		
 		System.out.println(userservice.addUser(register));
 		
@@ -79,7 +79,7 @@ public class Zee5appspringbootApplication {
 		}
 		
 		
-		Subscription subscription = new Subscription("sub00001","annual","01-01-2022","india","upi","true","as","active",1000,"9491612222","sc00003");
+		Subscription subscription = new Subscription("sub00002","annual","01-01-2022","india","upi","true","as","active",1000,"9491612222","sc00003");
 		
 		System.out.println(subservice.addSubscription(subscription));
 		
@@ -101,7 +101,7 @@ public class Zee5appspringbootApplication {
 		
 		
 		
-		Movie movie = new Movie("mov00002","rrr","ntr,rc",150,"13-3-2022","youtube.com","telugu",17,"action");
+		Movie movie = new Movie("mov00003","rrr","ntr,rc",150,"13-3-2022","youtube.com","telugu",17,"action");
 		System.out.println(movieservice.addMovie(movie));
 		
 		Optional<List<Movie>> optional2 = movieservice.getAllMovieDetails();
@@ -111,7 +111,7 @@ public class Zee5appspringbootApplication {
 		else {
 			optional2.get().forEach(e->System.out.println(e));
 		}
-		Series series = new Series("ser00001","tvd","supernatural","12-03-2016","youtube.com",20,"english","ian",18);
+		Series series = new Series("ser00002","originals","supernatural","12-03-2016","youtube.com",20,"english","ian",18);
 		System.out.println(seriesservice.addSeries(series));
 		
 		Optional<List<Series>> optional3 = seriesservice.getAllSeriesDetails();
@@ -123,13 +123,13 @@ public class Zee5appspringbootApplication {
 		}
 		
 		
-		Login login = new Login("suryavamsi@gmail.com","12345678","sc00005",ROLE.ROLE_ADMIN);
+		Login login = new Login("suryavamsi01@gmail.com","12345678","sc00005",ROLE.ROLE_ADMIN);
 		
 		System.out.println(loginservice.addCredentials(login));
 		
 		
 		
-		Episodes episode = new Episodes("epi00001","pilot","ser00001",50,"us");
+		Episodes episode = new Episodes("epi00002","meeting","ser00002",10,"us");
 		episervice.addEpisodes(episode);
 		
 		Optional<List<Episodes>> optional4 = episervice.getAllEpisodesDetails();

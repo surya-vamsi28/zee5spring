@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity 
-@Table(name = "Login")
+@Table(name = "Episodes")
 public class Episodes {
 	private static final int vvalue = 0;
 	@Id 
