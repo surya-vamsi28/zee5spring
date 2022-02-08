@@ -1,4 +1,4 @@
-package com.zee.zee5app.dto;
+ package com.zee.zee5app.dto;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -11,26 +11,33 @@ import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.zee.zee5app.exception.InvalidEmailException;
 import com.zee.zee5app.exception.InvalidIdLengthException;
 import com.zee.zee5app.exception.InvalidNameException;
 import com.zee.zee5app.exception.InvalidPasswordException;
+import com.zee.zee5app.utils.CustomListSerializer;
 
 
 @Setter
@@ -49,17 +56,7 @@ import com.zee.zee5app.exception.InvalidPasswordException;
 
 public class Register implements Comparable<Register>
 {
-//	
-//	public Register(String id,String firstName,String lastName, String email, String password, BigDecimal contactNumber) throws InvalidNameException, InvalidIdLengthException, InvalidEmailException, InvalidPasswordException {
-//		super();
-//		this.setId(id);
-//		this.setFirstName(firstName);
-//		this.setLastName(lastName);
-//		this.setEmail(email);
-//		this.setPassword(password);
-//		this.setContactNumber(contactNumber);
-//	}
-	// it will consider this column as primary
+
 	@Id 
 	@Column(name = "regId")
 
@@ -78,7 +75,7 @@ public class Register implements Comparable<Register>
 	@NotBlank
 	private String password;
 	
-	@NotNull
+	
 	private BigDecimal contactNumber;
 	// private stuff will be accesible only inside class.
 	
@@ -99,10 +96,15 @@ public class Register implements Comparable<Register>
 	}
 
 	@ManyToMany
+//	@JsonSerialize(using = CustomListSerializer.class) 
+//	@JsonIgnore
 	@JoinTable(name = "user_roles",joinColumns = @JoinColumn(name="regId"),
 	inverseJoinColumns = @JoinColumn(name="role_id")) // registered user(regid) and role(roleid)
 	private Set<Role> roles = new HashSet<>();
 	
+	@OneToOne(mappedBy = "register",cascade = CascadeType.ALL)
+	private Subscription subscription;
 	
-
+	@OneToOne(mappedBy = "register", cascade = CascadeType.ALL)
+	private Login login;
 }

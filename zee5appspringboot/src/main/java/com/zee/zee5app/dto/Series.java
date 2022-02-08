@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Max;
@@ -59,6 +60,8 @@ public class Series {
 		
 	@OneToMany(mappedBy = "series", cascade = CascadeType.ALL)
 	private List<Episodes> episodes = new ArrayList<>();
+	
+
 	
 	
 	

@@ -1,6 +1,7 @@
 package com.zee.zee5app.service;
 
 import com.zee.zee5app.dto.Register;
+import com.zee.zee5app.exception.AlreadyExistsException;
 import com.zee.zee5app.exception.IdNotFoundException;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import com.zee.zee5app.dto.Movie;
 
 public interface MovieService {
 	
-	public String addMovie(Movie movie);
+	public Movie addMovie(Movie movie) throws AlreadyExistsException;
 	public String updateMovie(String id, Movie movie) throws IdNotFoundException;
 	public Optional<Movie> getMovieById(String id) throws IdNotFoundException;
 	public Movie[] getAllMovies();

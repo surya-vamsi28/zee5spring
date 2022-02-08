@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.zee.zee5app.dto.Movie;
 @Component
 public interface MovieRepository extends JpaRepository<Movie, String> {
-//	Boolean existsByMovie_name(String movie_name);
+	Boolean existsByName(String name);
 	// retrieve details based on movieName and language
 	// boolean results ===> exits
 	//findby ===> 

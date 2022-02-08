@@ -5,6 +5,7 @@ import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Max;
@@ -38,8 +39,9 @@ public class Movie {
 	private int length;
 	@NotNull
 	private String release_date;
-	@NotBlank
-	private String trailer;
+//	@Lob
+//	private byte[] trailer;
+	private String Trailer;
 	@NotBlank
 	private String language;
 	@Max(value=70)

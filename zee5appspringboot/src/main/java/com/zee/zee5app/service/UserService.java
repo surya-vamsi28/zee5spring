@@ -15,10 +15,10 @@ import com.zee.zee5app.exception.InvalidNameException;
 import com.zee.zee5app.exception.InvalidPasswordException;
 @Component
 public interface UserService {
-	public String addUser(Register register) throws AlreadyExistsException;
+	public Register addUser(Register register) throws AlreadyExistsException;
 	public String updateUser(String id, Register register) throws IdNotFoundException;
-	public Optional<Register> getUserById(String id) throws IdNotFoundException, InvalidPasswordException, InvalidIdLengthException, InvalidNameException, InvalidEmailException;
+	public Register getUserById(String id) throws IdNotFoundException;
 	public Register[] getAllUsers() throws InvalidIdLengthException, InvalidNameException, InvalidEmailException, InvalidPasswordException;
 	public String deleteUserById(String id) throws IdNotFoundException;
-	public Optional<List<Register>> getAllUserDetails() throws InvalidIdLengthException, InvalidNameException, InvalidEmailException, InvalidPasswordException;
+	public Optional<List<Register>> getAllUserDetails() ;
 }

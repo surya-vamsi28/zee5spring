@@ -15,19 +15,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Entity 
 @Table(name = "Episodes")
 public class Episodes {
-	private static final int value = 0;
+	
 	@Id 
 	@Column(name = "id")
 	private String id;
 	@Size(max=50)
 	@NotBlank
 	private String name;
-	
+	private String Trailer;
 	@Min(value=0)
 	private int length;
 	@NotBlank
