@@ -7,41 +7,49 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Entity 
-@Table(name = "Login")
-public class Login {
-	@Id 
+@NoArgsConstructor
+@Setter
+@Getter
+@ToString
+@EqualsAndHashCode
+@Entity
+@Table(name = "login")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "userName")
+
+public class Login implements Comparable<Login>{
+	
+	@Id
 	@Column(name = "username")
-	@Email
 	private String userName;
-	@Size(max=50)
-	@NotBlank
+    @NotBlank
 	private String password;
-	@Size(max=50)
-	@NotBlank
-	private String reg_id;
+
+	@Override
+	public int compareTo(Login o) {
+		// TODO Auto-generated method stub   
+		return this.userName.compareTo(o.getUserName());
+	}
 	
 	@OneToOne(fetch = FetchType.LAZY)
-//	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-    @JoinColumn(name = "regId",nullable = false)
-	@JsonProperty(access = Access.WRITE_ONLY)
-	private Register register;
-	
+	@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
+    @JoinColumn(name = "regId")
+    @JsonProperty(access = Access.WRITE_ONLY)
+	private User register;
+
 }

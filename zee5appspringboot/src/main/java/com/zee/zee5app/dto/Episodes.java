@@ -6,33 +6,48 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Length;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@Setter
+@Getter
+//@EqualsAndHashCode
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 
-@Entity 
-@Table(name = "Episodes")
-public class Episodes {
+@Entity
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = "episodeName")}, name = "episodes")
+public class Episodes implements Comparable<Movie> {
 	
-	@Id 
+	@Id
 	@Column(name = "id")
+	@Length(min = 6)
 	private String id;
-	@Size(max=50)
 	@NotBlank
-	private String name;
-	private String Trailer;
-	@Min(value=0)
+	private String episodeName;
 	private int length;
-	@NotBlank
-	private String location;
+
+	@Override
+	public int compareTo(Movie o) {
+		// TODO Auto-generated method stub
+		return this.id.compareTo(o.getId());
+	}
+	
 	
 	@ManyToOne
-	@JoinColumn(name="seriesid") // for foreign key
-	private Series series; // series id and act as fk
+	//this episode table should have a foreign key
+	@JoinColumn(name = "seriesId")
+	private Series series; //this should take seriesId and that should act as foreign key
+
 }

@@ -1,24 +1,25 @@
 package com.zee.zee5app.service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
-import org.springframework.stereotype.Component;
-
-import com.zee.zee5app.dto.Register;
+import com.zee.zee5app.dto.User;
 import com.zee.zee5app.exception.AlreadyExistsException;
 import com.zee.zee5app.exception.IdNotFoundException;
 import com.zee.zee5app.exception.InvalidEmailException;
 import com.zee.zee5app.exception.InvalidIdLengthException;
-import com.zee.zee5app.exception.InvalidNameException;
+import com.zee.zee5app.exception.IdNotValidException;
 import com.zee.zee5app.exception.InvalidPasswordException;
-@Component
+
+import java.util.ArrayList;
+import java.util.List;
+import com.zee.zee5app.repository.UserRepository;
+
+
 public interface UserService {
-	public Register addUser(Register register) throws AlreadyExistsException;
-	public String updateUser(String id, Register register) throws IdNotFoundException;
-	public Register getUserById(String id) throws IdNotFoundException;
-	public Register[] getAllUsers() throws InvalidIdLengthException, InvalidNameException, InvalidEmailException, InvalidPasswordException;
-	public String deleteUserById(String id) throws IdNotFoundException;
-	public Optional<List<Register>> getAllUserDetails() ;
+	public User addUser(User register) throws AlreadyExistsException;
+	public String updateUser(Long id, User register) throws IdNotFoundException;
+	public User getUserById(Long id) throws IdNotFoundException;
+	public User[] getAllUsers() throws InvalidIdLengthException, IdNotValidException, InvalidEmailException, InvalidPasswordException;
+	public String deleteUserById(Long id) throws IdNotFoundException;
+	public Optional<List<User>> getAllUserDetails();
 }

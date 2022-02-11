@@ -25,7 +25,7 @@ import com.zee.zee5app.dto.Episodes;
 import com.zee.zee5app.dto.Login;
 import com.zee.zee5app.dto.Movie;
 
-import com.zee.zee5app.dto.Register;
+import com.zee.zee5app.dto.User;
 import com.zee.zee5app.dto.Role;
 import com.zee.zee5app.dto.Series;
 import com.zee.zee5app.dto.Subscription;
@@ -34,22 +34,20 @@ import com.zee.zee5app.exception.IdNotFoundException;
 import com.zee.zee5app.exception.InvalidAmountException;
 import com.zee.zee5app.exception.InvalidEmailException;
 import com.zee.zee5app.exception.InvalidIdLengthException;
-import com.zee.zee5app.exception.InvalidNameException;
+import com.zee.zee5app.exception.IdNotValidException;
 import com.zee.zee5app.exception.InvalidPasswordException;
 import com.zee.zee5app.exception.InvalidTypeException;
-import com.zee.zee5app.repository.EpisodesRepository;
+import com.zee.zee5app.repository.EpisodeRepository;
 import com.zee.zee5app.repository.MovieRepository;
 import com.zee.zee5app.repository.RoleRepository;
 import com.zee.zee5app.repository.UserRepository;
-import com.zee.zee5app.service.EpisodesService;
 import com.zee.zee5app.service.LoginService;
 import com.zee.zee5app.service.MovieService;
 import com.zee.zee5app.service.RoleService;
 import com.zee.zee5app.service.SeriesService;
 import com.zee.zee5app.service.SubscriptionService;
 import com.zee.zee5app.service.UserService;
-import com.zee.zee5app.service.impl.UserServiceImpl;
-import com.zee.zee5app.utils.FileStore;
+import com.zee.zee5app.service.Impl.UserServiceImpl;
 import com.zee.zee5app.utils.FileUtils;
 
 @SpringBootApplication

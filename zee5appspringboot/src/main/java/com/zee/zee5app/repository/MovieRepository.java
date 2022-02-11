@@ -1,24 +1,28 @@
 package com.zee.zee5app.repository;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.zee.zee5app.dto.Movie;
-@Component
+
+@Repository
 public interface MovieRepository extends JpaRepository<Movie, String> {
-	Boolean existsByName(String name);
-	// retrieve details based on movieName and language
-	// boolean results ===> exits
-	//findby ===> 
-//	Optional<Movie> findByMovie_nameAndMovie_language(String movie_name,String movie_language);
 	
-//	find a movie based on title/moviename and release_date , find a movie details by title.moviename
-//	find the list of movies based on cast name
-//	Optional<Movie> findByMovie_name(String movie_name);
-//	Optional<Movie> findByMovie_nameAndMovie_Release_Date(String movie_name,String movie_Release_Date);
-//	Optional<List<Movie>> findByMovie_cast(String movie_cast);
+	//find: retrieve details based on movieName and language
+	//boolean: exists
+	
+	//Boolean existsByMovieNameAndLanguage(String movieName, String language);
+	
+	
+	Optional<Movie> findByMovieNameAndLanguage(String movieName, String language);
+	
+	Optional<Movie> findByMovieName(String movieName);
+	
+	Optional<Movie> findByMovieNameAndReleaseDate(String movieName, String releaseDate);
+	
+	Optional<Movie> findByCast(String cast);
+	
+    
 }
