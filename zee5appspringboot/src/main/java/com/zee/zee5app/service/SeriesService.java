@@ -12,10 +12,10 @@ import com.zee.zee5app.exception.InvalidIdLengthException;
 
 public interface SeriesService {
 	
-	public String addSeries(Series series); 
+	public Series addSeries(Series series); 
 	public String deleteSeries(String id) throws IdNotFoundException;
 	public String modifySeries(String id, Series series) throws IdNotFoundException;
-	public Optional<Series> getSeriesById(String id) throws IdNotFoundException, NameNotFoundException, InvalidIdLengthException;
+	public Series getSeriesById(String id) throws IdNotFoundException, NameNotFoundException, InvalidIdLengthException;
 	public Optional<List<Series>> getAllSeries() throws NameNotFoundException, InvalidIdLengthException;
 
 }

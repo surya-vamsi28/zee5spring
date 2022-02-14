@@ -28,23 +28,23 @@ public class SeriesServiceImpl implements SeriesService {
 	public SeriesRepository repository;
 
 	@Override
-	public String addSeries(Series series) {
+	public Series addSeries(Series series) {
 		// TODO Auto-generated method stub
 		Series series2 = repository.save(series);
 		if (series2 != null) {
-			return "record added in series";
+			return series2;
 		} else {
-			return "fail";
+			return null;
 		}
 	}
 
 	@Override
 	public String deleteSeries(String id) throws IdNotFoundException {
 		// TODO Auto-generated method stub
-		Optional<Series> optional;
+		Series optional;
 		try {
 			optional = this.getSeriesById(id);
-			if(optional.isEmpty()) {
+			if(optional == null) {
 				throw new IdNotFoundException("record not found");
 			}
 			else {
@@ -65,9 +65,16 @@ public class SeriesServiceImpl implements SeriesService {
 	}
 
 	@Override
-	public Optional<Series> getSeriesById(String id) throws IdNotFoundException, NameNotFoundException, InvalidIdLengthException {
+	public Series getSeriesById(String id) throws IdNotFoundException, NameNotFoundException, InvalidIdLengthException {
 		// TODO Auto-generated method stub
-		return repository.findById(id);
+		Optional<Series> optional =  repository.findById(id);
+		if(optional.isEmpty()) {
+			throw new IdNotFoundException("id does not exists");
+		}
+		else {
+			return optional.get();
+		}
+
 	}
 
 	@Override

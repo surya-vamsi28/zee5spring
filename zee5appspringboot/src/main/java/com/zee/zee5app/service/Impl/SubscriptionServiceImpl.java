@@ -27,23 +27,23 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 
 	@Override
-	public String addSubscription(Subscription subscription) throws InvalidAmountException {
+	public Subscription addSubscription(Subscription subscription) throws InvalidAmountException {
 		// TODO Auto-generated method stub
 		Subscription subscription2 = repository.save(subscription);
 		if (subscription2 != null) {
-			return "record added in subscription";
+			return subscription2;
 		} else {
-			return "fail";
+			return null;
 		}
 	}
 
 	@Override
 	public String deleteSubscription(String id) throws IdNotFoundException {
 		// TODO Auto-generated method stub
-		Optional<Subscription> optional;
+		Subscription optional;
 		try {
 			optional = this.getSubscriptionById(id);
-			if(optional.isEmpty()) {
+			if(optional == null) {
 				throw new IdNotFoundException("record not found");
 			}
 			else {
@@ -64,9 +64,16 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	}
 
 	@Override
-	public Optional<Subscription> getSubscriptionById(String id) throws IdNotFoundException, InvalidIdLengthException, InvalidAmountException {
+	public Subscription getSubscriptionById(String id) throws IdNotFoundException, InvalidIdLengthException, InvalidAmountException {
 		// TODO Auto-generated method stub
-		return repository.findById(id);
+		Optional<Subscription> optional =  repository.findById(id);
+		if(optional.isEmpty()) {
+			throw new IdNotFoundException("id does not exists");
+		}
+		else {
+			return optional.get();
+		}
+
 	}
 
 	@Override

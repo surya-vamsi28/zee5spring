@@ -19,40 +19,40 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zee.zee5app.dto.Movie;
+import com.zee.zee5app.dto.Series;
 import com.zee.zee5app.exception.IdNotFoundException;
 import com.zee.zee5app.exception.InvalidIdLengthException;
 import com.zee.zee5app.payload.response.MessageResponse;
-import com.zee.zee5app.service.MovieService;
+import com.zee.zee5app.service.SeriesService;
 
 @RestController
-@RequestMapping("/api/movies")
-public class MovieController {
-	
+@RequestMapping("/api/series")
+public class SeriesController {
+
 	@Autowired
-	MovieService movieService;
+	SeriesService seriesService;
 	
-	@PostMapping("/addMovie")
+	@PostMapping("/addSeries")
 	@PreAuthorize("hasRole('ADMIN')")
 	//used ? so we can return any type
-	public ResponseEntity<?> addMovie(@Valid @RequestBody Movie movie) {
+	public ResponseEntity<?> addSeries(@Valid @RequestBody Series series) {
 		
-		Movie result = movieService.addMovie(movie);
+		Series result = seriesService.addSeries(series);
 		return ResponseEntity.status(201).body(result);
 	}
 	
 	@GetMapping("/{id}")
 	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-	public ResponseEntity<?> getMovieById(@PathVariable("id") String id) throws IdNotFoundException, NameNotFoundException, InvalidIdLengthException{
-		Movie result = movieService.getMovieById(id);
+	public ResponseEntity<?> getSeriesById(@PathVariable("id") String id) throws NameNotFoundException, IdNotFoundException, InvalidIdLengthException {
+		Series result = seriesService.getSeriesById(id);
 		return ResponseEntity.ok(result);	
 		
 	}
 	
 	@GetMapping("/all")
 	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-	public ResponseEntity<?> getAllMovieDetails() throws NameNotFoundException, InvalidIdLengthException{
-		Optional<List<Movie>> optional = movieService.getAllMovie();
+	public ResponseEntity<?> getAllSeriesDetails() throws NameNotFoundException, InvalidIdLengthException{
+		Optional<List<Series>> optional = seriesService.getAllSeries();
 		if(optional.isEmpty()) {
 			Map<String, String> map = new HashMap<>();
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(new MessageResponse("no record found"));
@@ -60,10 +60,6 @@ public class MovieController {
 		return ResponseEntity.ok(optional.get());	
 		
 	}
-
-	
-	
-	
 	
 	
 }

@@ -47,10 +47,10 @@ public class MovieServiceImpl implements MovieService {
 	public String deleteMovie(String id) throws IdNotFoundException {
 		// TODO Auto-generated method stub
 		
-		Optional<Movie> optional;
+		Movie optional;
 		try {
 			optional = this.getMovieById(id);
-			if(optional.isEmpty()) {
+			if(optional == null) {
 				throw new IdNotFoundException("record not found");
 			}
 			else {
@@ -71,9 +71,15 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	@Override
-	public Optional<Movie> getMovieById(String id) throws IdNotFoundException, NameNotFoundException, InvalidIdLengthException {
+	public Movie getMovieById(String id) throws IdNotFoundException, NameNotFoundException, InvalidIdLengthException {
 		// TODO Auto-generated method stub
-		return repository.findById(id);
+		Optional<Movie> optional =  repository.findById(id);
+		if(optional.isEmpty()) {
+			throw new IdNotFoundException("id does not exists");
+		}
+		else {
+			return optional.get();
+		}
 	}
 
 	@Override
